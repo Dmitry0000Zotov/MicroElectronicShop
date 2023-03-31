@@ -1,0 +1,64 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    background-color: #eaf6fe;
+}
+
+/*Slider*/
+.my-carousel {
+    padding: 0;
+}
+
+.my-carousel .carousel-item {
+    display: flex;
+    max-height: 700px;
+    background-color: #000;
+}
+
+.my-carousel .carousel-item img {
+    object-fit: cover;
+    opacity: 0.5;
+}
+/*Slider*/
+
+/*Hovering on nav-link*/
+.nav-item:hover {
+    background-color: #808080;
+    border-radius: 4px;
+}
+/*Hovering on nav-link*/
+
+.wrapper {
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+}
+.main {
+    flex: 1 0 auto;
+}
+/*Footer*/
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.footer-link:hover {
+    color: #ececec;
+    border-bottom: 1px solid #ececec;
+}
+
+footer {
+    flex: 0 0 auto;
+}
+
+.contacts:hover {
+    color: #ececec;
+    border-bottom: none;
+}
+/*Footer*/
+
+

@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Информация о ресурсе";
+}
+
+<style>
+
+</style>
+<div class="container">
+    <h1 class="display-6 mt-3 mb-4"><b>Руководство пользователя</b></h1>
+    <div class="container">
+
+        <div class="accordion mb-3" id="accordionPanel">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="accordionHeadOne">
+                    <button class="accordion-button collapsed fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panels-collapseOne" aria-expanded="false" aria-controls="panels-collapseOne">
+                        Как добавить оборудование в заявку?
+                    </button>
+                </h2>
+                <div id="panels-collapseOne" class="accordion-collapse collapse" aria-labelledby="accordionHeadOne">
+                    <div class="accordion-body">
+                        <p>Чтобы оформить заявку на интересующее вас оборудование, необходимо перейти во вкладку <strong>Каталог</strong>
+                            , которая расположена в верхней навигационной панели, либо перейти по этой <a asp-controller="Catalog" asp-action="Index">cсылке</a>.</p>
+                        <p>После перехода в <strong>Каталог</strong>, выберите интересующую вас категорию товара. 
+                            В открывшемся списке оборудования, выберите небходимое вам и нажмите на кнопку <strong>Добавить в заявку</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-3" id="accordionPanelTwo">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="accordionHeadSecond">
+                    <button class="accordion-button collapsed fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panels-collapseSecond" aria-expanded="false" aria-controls="panels-collapseSecond">
+                        Как посмотреть характеристики оборудования?
+                    </button>
+                </h2>
+                <div id="panels-collapseSecond" class="accordion-collapse collapse" aria-labelledby="accordionHeadSecond">
+                    <div class="accordion-body">
+                        <p>
+                            Чтобы посмотреть характеристики конкретного оборудования, необходимо перейти в <strong>Каталог</strong> и выбрать интересующую категорию товара.
+                            В открывшемся списке выберите необходимое оборудование и нажмите на кнопку <strong>Подробнее</strong>. 
+                            На открывшейся странице будут выведены характеристики оборудования.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-3" id="accordionPanelThree">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="accordionHeadThird">
+                    <button class="accordion-button collapsed fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panels-collapseThird" aria-expanded="false" aria-controls="panels-collapseThird">
+                        Как оформить заявку на оборудование?
+                    </button>
+                </h2>
+                <div id="panels-collapseThird" class="accordion-collapse collapse" aria-labelledby="accordionHeadThird">
+                    <div class="accordion-body">
+                        <p>
+                            Чтобы оформить заявку на выбранное вами оборудование, перейдите в <strong>Заявку</strong>, нажав на соответствующую иконку в верхней навигационной панели (<i class="bi bi-file-earmark-text fs-3"></i>),
+                            либо по этой <a asp-controller="ApplicationItems" asp-action="MyApplicationItems">ссылке</a>.
+                        </p>
+                        <p>
+                            На странице заявки убедитесь в правильности выбранного оборудования и нажмите на кнопку <strong>Оформить заявку</strong>.
+                        </p>
+                        <div class="alert alert-warning" role="alert">
+                           Внимание! После нажатия на кнопку <strong>Оформить заявку</strong> действие отменить нельзя. Для отмены случайных заявок обратитесь 
+                           к старшему по должности либо сообщите в службу поддержки. Контакты службы поддержки расположены в нижней части сайта.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

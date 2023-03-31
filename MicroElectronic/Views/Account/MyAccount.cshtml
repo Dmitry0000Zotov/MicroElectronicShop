@@ -1,0 +1,64 @@
+﻿@model MicroElectronic.Domain.ViewModels.User.UserViewModel
+@{
+    ViewData["Title"] = "Аккаунт";
+}
+<head>
+    <link rel="stylesheet" href="~/css/mainpage.css" asp-append-version="true" />
+</head>
+<div class="container">
+    <h1 class="display-6 mt-3 mb-4"><b>Информация об аккаунте</b></h1>
+    <div class="row row-cols-1 row-cols-md-1 row-cols-sm-1 row-cols-lg-2">
+        <div class="col">
+            <div class="card text-start">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">Общая информация</h3> 
+                </div>
+                <div class="container mb-3">
+                    <div class="row px-3">
+                        <div class="col-6">
+                            <p class="fs-5"><b>Имя:</b></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="fs-5">@Model.Name</p>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="col-6">
+                            <p class="fs-5"><b>Фамилия:</b></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="fs-5">@Model.Surname</p>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="col-6">
+                            <p class="fs-5"><b>Должность:</b></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="fs-5">@Model.Position</p>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="col-6">
+                            <p class="fs-5"><b>Роль:</b></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="fs-5">@Model.Role</p>
+                        </div>
+                    </div>
+                    <div class="row px-3">
+                        <div class="col-6">
+                            <p class="fs-5"><b>Логин:</b></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="fs-5">@Model.Login</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+
+        </div>
+    </div> @*main row*@ 
+</div>@*main container*@

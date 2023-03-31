@@ -1,0 +1,80 @@
+﻿@model MicroElectronic.Domain.ViewModels.Pagination.IndexViewModel
+@{
+    ViewData["Title"] = "Оборудование";
+}
+<head>
+    <link rel="stylesheet" href="~/css/equipments.css" asp-append-version="true" />
+</head>
+<div class="container main-container">
+    <h1 class="display-5 mt-3 fs-1 mb-2"><b>Список оборудования</b></h1>
+    <h1 class="display-5 mt-3 fs-3 mb-4"><b> Категория: @ViewData["CategoryTitle"]</b></h1>
+    @if (Model.Equipments.Count() == 0)
+    {
+        <div class="container">
+            <div class="alert alert-warning" role="alert">
+                В настоящий момент список оборудования пуст.
+                <a asp-action="Index" asp-controller="Catalog" class="alert-link">Перейти в каталог</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        @foreach (var equipment in @Model.Equipments)
+        {
+            <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2 equip-image text-center d-none d-sm-none d-md-none d-lg-flex">
+                                <img class="img-fluid equip-image-list" src="@equipment.ImageUrl" />
+                            </div>
+                            <div class="col-10 text-start">
+                                <div class="row">
+                                    <div class="card-title"><b>@equipment.Name</b></div>
+                                </div>
+                                <div class="row">
+                                    <p>@equipment.Description</p>
+                                </div>
+                                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2">
+                                    <div class="col align-middle mb-2 mb-sm-2 mb-md-0 mb-lg-0">
+                                        <span class="fs-4">&#8381 @equipment.Price</span>
+                                    </div>
+                                    <div class="col text-start text-sm-start text-md-end text-lg-end">
+                                        <a role="button" class="btn btn-outline-dark me-2 mb-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Добавить в заявку" 
+                                             onclick="addToApp({'equipId':@equipment.Id,'userId':@User.FindFirst("Id").Value})" >В заявку</a>
+                                        <a role="button" class="btn btn-outline-dark mb-2" href="~/Catalog/Equipments/EquipmentPage?id=@equipment.Id">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        }
+        <div class="container container-bottom">
+            <div class="row">
+                @if (Model.PageViewModel.HasPreviousPage)
+                {
+                    <div class="col text-start">
+                        <a class="btn btn-outline-dark" asp-action="Equipments" asp-route-page="@(Model.PageViewModel.PageNumber - 1)" asp-route-category="@ViewData["CategoryId"]">
+                            <i class="bi bi-chevron-left"></i>
+                            Назад
+                        </a>
+                    </div>
+                }
+                @if (Model.PageViewModel.HasNextPage)
+                {
+                    <div class="col text-end">
+                        <a class="btn btn-outline-dark" asp-action="Equipments" asp-route-page="@(Model.PageViewModel.PageNumber + 1)" asp-route-category="@ViewData["CategoryId"]">
+                            Вперед
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+</div>
+
+<script src="~/js/addToApplication.js" asp-append-version="true"></script>
