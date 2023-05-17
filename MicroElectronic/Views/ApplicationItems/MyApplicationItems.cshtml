@@ -117,7 +117,7 @@ else
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            <a role="button" class="btn btn-outline-dark">Оформить заявку</a>
+                                <a role="button" class="btn btn-outline-dark" onclick="createOrder({url: '/Order/CreateOrder'})" data-toggle="ajax-modal" data-target="Modal">Оформить заявку</a>
                         </div>
                     </div>
                 </div>
@@ -130,3 +130,4 @@ else
 
 <script src="~/js/removeFromApplication.js" asp-append-version="true"></script>
 <script src="~/js/quantityChange.js" asp-append-version="true"></script>
+<script src="~/js/createOrder.js" asp-append-version="true"></script>

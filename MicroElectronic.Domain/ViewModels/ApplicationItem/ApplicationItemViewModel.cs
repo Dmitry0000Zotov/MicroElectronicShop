@@ -10,6 +10,8 @@ namespace MicroElectronic.Domain.ViewModels.ApplicationItem
     {
         public int ItemId { get; set; }
 
+        public int EquipmentId { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }

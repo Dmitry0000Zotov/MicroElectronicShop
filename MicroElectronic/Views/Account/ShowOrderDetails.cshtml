@@ -1,0 +1,49 @@
+﻿@model MicroElectronic.Domain.ViewModels.Order.OrderDetailsViewModel
+@{
+}
+
+<form asp-action="ShowOrderDetails" enctype="multipart/form-data" id="formUpdateUser" method="post">
+    <input type="hidden" asp-for="OrderId" />
+    <div class="mb-3">
+        <h5>Идентификатор заявки - @Model.OrderId</h5>
+    </div>
+    <div class="mb-3">
+        <h5>Автор заявки:</h5>
+    </div>
+    <div class="mb-3">
+        <label class="col-form-label">Имя: @User.FindFirst("UserName").Value</label>
+    </div>
+    <div class="mb-3">
+        <label class="col-form-label">Фамилия: @User.FindFirst("UserSurname").Value</label>
+    </div>
+    <div class="mb-3">
+        <h5 class="mb-3">Детали заявки:</h5>
+    </div>
+    <div class="mb-5">
+        <ol>
+        @foreach (var item in Model.OrderItems)
+        {
+            <li>
+                <div class="row">
+                    <div class="col">
+                        @item.Name
+                    </div>
+                    <div class="col">
+                        @item.Quantity шт.
+                    </div>
+                    <div class="col">
+                        &#8381 @item.Price
+                    </div>
+                </div>
+            </li>
+        }
+        </ol>
+    </div>
+
+
+    <div class="row">
+        <div class="col text-start">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        </div>
+    </div>
+</form>

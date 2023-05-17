@@ -15,8 +15,8 @@ namespace MicroElectronic.Service.Interfaces
 
         Task<IBaseResponse<bool>> DeleteUser(int id);
 
-        Task<IBaseResponse<User>> Update(int id, UserViewModel model);
+        Task<IBaseResponse<User>> Update(UserViewModel model);
 
-        IBaseResponse<Dictionary<int, string>> GetRoles();
+        IBaseResponse<Dictionary<int, string>> SetRoles();
     }
 }

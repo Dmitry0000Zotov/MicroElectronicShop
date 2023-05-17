@@ -1,6 +1,7 @@
 ﻿@model MicroElectronic.Domain.ViewModels.User.UserViewModel
 @{
     ViewData["Title"] = "Аккаунт";
+    int number = 1;
 }
 <head>
     <link rel="stylesheet" href="~/css/mainpage.css" asp-append-version="true" />
@@ -58,7 +59,51 @@
             </div>
         </div>
         <div class="col">
-
+            <div class="card text-start">
+                <div class="card-body">
+                    <h3 class="card-title fw-bold">Список последних заказов</h3>
+                </div>
+                <div class="container mt-3">
+                    <div id="list-container">
+                        <div class="row ms-2 align-items-center fs-5 fw-bold">
+                            <div class="col-1">№</div>
+                            <div class="col-5">Идент. заказа</div>
+                            <div class="col-3">Время создания</div>
+                            <div class="col-3">Статус</div>
+                        </div>
+                        <div class="list-group mb-3">
+                        @foreach (var order in ViewBag.Orders)
+                        {
+                            <a role="button" class="list-group-item list-group-item-action" onclick="showOrderDetails({url: '/Account/ShowOrderDetails', orderId: '@order.OrderId'})">
+                                <div class="row ms-2 align-items-center fs-5">
+                                    <div class="col-1">@(number++)</div>
+                                    <div class="col-5">@order.OrderId</div>
+                                    <div class="col-3">@order.DateCreated</div>
+                                    @if(order.Status == "В ожидании")
+                                    {
+                                       <div class="col-3 text-warning">@order.Status</div>
+                                    }
+                                    else if (order.Status == "Отменен")
+                                    {
+                                        <div class="col-3 text-danger">@order.Status</div>
+                                    }
+                                    else if (order.Status == "Принят")
+                                    {
+                                        <div class="col-3 text-success">@order.Status</div>
+                                    }
+                                    else if (order.Status == "Выполнен")
+                                    {
+                                        <div class="col-3 text-success">@order.Status</div>
+                                    }
+                                </div>
+                            </a>
+                        }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div> @*main row*@ 
 </div>@*main container*@
+
+<script src="~/js/showOrderDetails.js" asp-append-version="true"></script>

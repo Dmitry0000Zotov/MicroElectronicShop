@@ -61,7 +61,6 @@ namespace MicroElecWebStore.Controllers
         [HttpPost]
         public async Task<IActionResult> EditCategory(IFormFile? file, [FromForm]CategoryViewModel model)
         {
-            Console.WriteLine(model.ImageUrl);
             if (model.Name != null)
             {
                 if(file?.Length > 0)

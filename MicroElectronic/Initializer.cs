@@ -14,6 +14,8 @@ namespace MicroElectronic
             services.AddScoped<IBaseRepository<Category>, CategoryRepository>();
             services.AddScoped<IBaseRepository<Equipment>, EquipmentRepository>();
             services.AddScoped<IBaseRepository<ApplicationItem>, ApplicationItemsRepository>();
+            services.AddScoped<IBaseRepository<Order>, OrderRepository>();
+            services.AddScoped<IBaseRepository<OrderDetail>, OrderDetailRepository>();
         }
 
         public static void InitializeServices(this IServiceCollection services)
@@ -24,6 +26,7 @@ namespace MicroElectronic
             services.AddScoped<IEquipmentService, EquipmentService>();
             services.AddScoped<IBufferedFileUploadService, BufferedFileUploadService>();
             services.AddScoped<IApplicationItemService, ApplicationItemService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
     }
 }

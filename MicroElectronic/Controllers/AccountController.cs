@@ -1,4 +1,5 @@
 ﻿using MicroElectronic.Domain.ViewModels.Account;
+using MicroElectronic.Service.Implementations;
 using MicroElectronic.Service.Interfaces;
 using MicroElecWebStore.Controllers;
 using Microsoft.AspNetCore.Authentication;
@@ -13,11 +14,13 @@ namespace MicroElectronic.Controllers
 
         private readonly IAccountService _accountService;
         private readonly IUserService _userService;
+        private readonly IOrderService _orderService;
 
-        public AccountController(IAccountService accountService, IUserService userService)
+        public AccountController(IAccountService accountService, IUserService userService, IOrderService orderService)
         {
             _accountService = accountService;
             _userService = userService;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -78,13 +81,28 @@ namespace MicroElectronic.Controllers
             var id = Int32.Parse(User.FindFirst("Id").Value);
 
             var response = await _userService.GetUser(id);
+            var orders = await _orderService.GetOrders(id);
 
             if(response.StatusCode == System.Net.HttpStatusCode.OK)
             {
+                ViewBag.Orders = orders.Data;
                 return View(response.Data);
             }
 
             return View("MyAccount"); 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ShowOrderDetails(Guid orderId)
+        {
+            var response = await _orderService.GetOrderDetails(orderId);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return PartialView(response.Data);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

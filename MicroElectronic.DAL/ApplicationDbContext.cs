@@ -19,6 +19,11 @@ namespace MicroElectronic.DAL
 
         public DbSet<ApplicationItem> ApplicationItems { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(builder =>
@@ -36,7 +41,6 @@ namespace MicroElectronic.DAL
                         Login = "admin",
                         Password = HashPasswordHelper.HashPassword("admin"),
                         Role = Role.Admin
-
                     }
                 });
 
@@ -118,6 +122,26 @@ namespace MicroElectronic.DAL
                 builder.HasOne(u => u.User)
                     .WithMany(x => x.ApplicationItems)
                     .HasForeignKey(u => u.UserId);
+            });
+
+            modelBuilder.Entity<Order>(builder =>
+            {
+                builder.ToTable("Orders").HasKey(x => x.Id);
+
+                builder.HasMany(o => o.OrderDetails)
+                    .WithOne(od => od.Order)
+                    .HasForeignKey(o => o.OrderId);
+
+                builder.HasOne(o => o.User)
+                    .WithMany(u => u.Orders)
+                    .HasForeignKey(o => o.UserId);
+            });
+
+            modelBuilder.Entity<OrderDetail>(builder =>
+            {
+                builder.ToTable("OrderDetails").HasKey(od => od.Id);
+
+                builder.Property(od => od.Id).ValueGeneratedOnAdd();
             });
         }
     }

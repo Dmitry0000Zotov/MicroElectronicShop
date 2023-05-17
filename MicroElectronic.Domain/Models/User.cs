@@ -19,5 +19,7 @@ namespace MicroElectronic.Domain.Models
         public Role Role { get; set; }
 
         public List<ApplicationItem> ApplicationItems { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

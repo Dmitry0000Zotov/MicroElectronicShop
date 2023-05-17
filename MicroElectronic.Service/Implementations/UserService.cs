@@ -1,4 +1,5 @@
 ﻿using MicroElectronic.DAL.Interfaces;
+using MicroElectronic.Domain.Enum;
 using MicroElectronic.Domain.Extensions;
 using MicroElectronic.Domain.Models;
 using MicroElectronic.Domain.Response;
@@ -30,7 +31,34 @@ namespace MicroElectronic.Service.Implementations
 
         public async Task<IBaseResponse<bool>> DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = await _userRepository.GetAll().FirstOrDefaultAsync(user => user.Id == id);
+                if(user == null)
+                {
+                    return new BaseResponse<bool>()
+                    {
+                        Data = false,
+                        StatusCode = System.Net.HttpStatusCode.NotFound,
+                        Description = "Пользователь не найден"
+                    };
+                }
+
+                await _userRepository.Delete(user);
+                return new BaseResponse<bool>()
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    Data = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<bool>()
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Description = $"[DeleteUser]: {ex.Message}"
+                };
+            }
         }
 
         public async Task<IBaseResponse<IEnumerable<UserViewModel>>> GetAllUsers()
@@ -63,7 +91,7 @@ namespace MicroElectronic.Service.Implementations
             }
         }
 
-        public IBaseResponse<Dictionary<int, string>> GetRoles()
+        public IBaseResponse<Dictionary<int, string>> SetRoles()
         {
             throw new NotImplementedException();
         }
@@ -108,9 +136,40 @@ namespace MicroElectronic.Service.Implementations
             }
         }
 
-        public Task<IBaseResponse<User>> Update(int id, UserViewModel model)
+        public async Task<IBaseResponse<User>> Update(UserViewModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Id == model.Id);
+                if (user == null)
+                {
+                    return new BaseResponse<User>()
+                    {
+                        StatusCode = System.Net.HttpStatusCode.NotFound,
+                        Description = "Пользователь не найден"
+                    };
+                }
+
+                user.Name = model.Name;
+                user.Surname = model.Surname;
+                user.Position = model.Position;
+                user.Role = (Role) Enum.Parse(typeof(Role), model.Role);
+
+                await _userRepository.Update(user);
+                return new BaseResponse<User>()
+                {
+                    Data = user,
+                    StatusCode = System.Net.HttpStatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse<User>
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    Description = $"[UpdateUser]: {ex.Message}"
+                };
+            }
         }
     }
 }

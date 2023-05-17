@@ -36,7 +36,7 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item text-white me-3">
-                                <a class="btn btn-outline-light">Админ панель</a>
+                                <a class="btn btn-outline-light" asp-controller="AdminPanel" asp-action="Index">Админ панель</a>
                             </li>
                         }
                     </ul>
